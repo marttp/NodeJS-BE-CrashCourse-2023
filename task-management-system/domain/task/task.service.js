@@ -1,44 +1,33 @@
-let id = 1;
-let tasks = [
-  {
-    id: 1,
-    title: 'Test',
-    status: 'TODO',
-  },
-];
+import TaskModel from './task.schema.js';
 
 export async function getTasks() {
+  const tasks = await TaskModel.find({}).exec();
   return tasks;
 }
 
 export async function createTask(task) {
-  const newlyTask = {
-    id: ++id,
-    ...task,
-  };
-  tasks.push(newlyTask);
+  const prepareTask = new TaskModel({
+    title: task.title,
+    status: task.status,
+  });
+  const newlyTask = await prepareTask.save();
   return newlyTask;
 }
 
 export async function updateTask(taskDetail) {
   const { taskId, data } = taskDetail;
-  const prepareTaskIndex = tasks.findIndex((t) => t.id === +taskId);
-  if (prepareTaskIndex < 0) {
-    throw new Error('NOT_FOUND');
+  const updatedTask = await TaskModel.findByIdAndUpdate(taskId, data, {
+    new: true,
+  });
+  if (!updatedTask) {
+    throw new Error('NF_0001');
   }
-  tasks[prepareTaskIndex] = {
-    id: taskId,
-    ...tasks[prepareTaskIndex],
-    ...data,
-  };
-  return tasks[prepareTaskIndex];
+  return updatedTask;
 }
 
 export async function deleteTask(taskId) {
-  const id = +taskId
-  const prepareTaskIndex = tasks.findIndex((t) => t.id === id);
-  if (prepareTaskIndex < 0) {
-    throw new Error('NOT_FOUND');
+  const deletedTask = await TaskModel.findByIdAndDelete(taskId);
+  if (!deletedTask) {
+    throw new Error('NF_0001');
   }
-  tasks = tasks.filter((t) => t.id !== id);
 }
