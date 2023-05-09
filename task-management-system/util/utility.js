@@ -3,13 +3,15 @@ export function handlingResponseError(error, req, res) {
     errorCode: 'ER_0001',
     message: 'Something went wrong',
   };
+  let statusCode = 500;
   switch (error.message) {
     case 'NF_0001':
+      statusCode = 404;
       response.errorCode = 'NF_0001';
       response.message = 'Task not found';
       break;
     default:
       console.error(error.message);
   }
-  return res.status(500).json(response);
+  return res.status(statusCode).json(response);
 }
