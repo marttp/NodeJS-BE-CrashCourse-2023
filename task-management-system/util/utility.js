@@ -1,3 +1,5 @@
+import logger from '../configs/log.config.js';
+
 export function handlingResponseError(error, req, res) {
   const response = {
     errorCode: 'ER_0001',
@@ -11,7 +13,7 @@ export function handlingResponseError(error, req, res) {
       response.message = 'Task not found';
       break;
     default:
-      console.error(error.message);
+      logger.error(error.message);
   }
   return res.status(statusCode).json(response);
 }
