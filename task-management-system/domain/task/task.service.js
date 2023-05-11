@@ -37,6 +37,7 @@ export async function updateTask(taskDetail) {
 
 export async function deleteTask(taskId) {
   const deletedTask = await TaskModel.findByIdAndDelete(taskId);
+  console.log(deletedTask);
   if (!deletedTask) {
     logger.error(
       `TaskId: ${taskId} not found, cannot make the update operation`

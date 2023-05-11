@@ -20,21 +20,27 @@ function generateWinstonRotateConfig(level) {
   }
   return new DailyRotateFile({
     filename: fileName,
-    datePattern: 'YYYY-MM-DD-HHmm',
+    datePattern: 'YYYY-MM-DD',
     maxSize: '10m',
     level,
   });
 }
 
+const fileTransports = [
+  generateWinstonRotateConfig(LOG_SEV_LEVEL),
+  generateWinstonRotateConfig('error'),
+];
+
 const logger = winston.createLogger({
   level: LOG_SEV_LEVEL,
   format: defaultFormat,
   defaultMeta: { service: APPLICATION_NAME },
-  transports: [
-    generateWinstonRotateConfig(LOG_SEV_LEVEL),
-    generateWinstonRotateConfig('error'),
-  ],
+  transports: [],
 });
+
+if (process.env.NODE_ENV !== 'test') {
+  fileTransports.forEach((t) => logger.add(t));
+}
 
 if (process.env.NODE_ENV !== 'production') {
   logger.add(
