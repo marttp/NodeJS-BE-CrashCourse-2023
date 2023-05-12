@@ -21,7 +21,7 @@ taskRouter.get('/', async (req, res) => {
 
 taskRouter.post(
   '/',
-  await schemaValidator(createTaskSchema),
+  schemaValidator(createTaskSchema),
   async (req, res) => {
     logger.debug('Start create Task');
     const task = req.body;
@@ -33,7 +33,7 @@ taskRouter.post(
 
 taskRouter.patch(
   '/:id',
-  await schemaValidator(updateTaskSchema),
+  schemaValidator(updateTaskSchema),
   async (req, res, next) => {
     logger.debug('Start update Task');
     const { id: taskId } = req.params;

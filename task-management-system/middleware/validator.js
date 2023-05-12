@@ -1,4 +1,4 @@
-export async function schemaValidator(schema) {
+export function schemaValidator(schema) {
   return async (req, res, next) => {
     try {
       await schema.validateAsync(req.body);
