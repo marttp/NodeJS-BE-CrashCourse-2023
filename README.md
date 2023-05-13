@@ -26,6 +26,19 @@ Topic ด้านล่าง เป็นเพียงตัวเลือ�
 
 #### Functionality ที่น่าสนใจ
 
+* ⭐️ Security for the login system
+  * [How to Build a Full-Stack Authentication App With React, Express, MongoDB, Heroku, and Netlify](https://www.freecodecamp.org/news/how-to-build-a-fullstack-authentication-system-with-react-express-mongodb-heroku-and-netlify/)
+  * Passport.js
+    * [passport-local](https://github.com/jaredhanson/passport-local)
+    * [passport-jwt](https://www.passportjs.org/packages/passport-jwt/)
+  * Quick command to create key
+
+    ```shell
+      openssl genrsa -out keypair.pem 2048
+      openssl rsa -in keypair.pem -pubout -out public.pem
+      openssl pkcs8 -in keypair.pem -topk8 -nocrypt -out private.pem
+    ```
+
 * [multipart/form-data ในการ upload image](https://github.com/node-formidable/formidable)
 * [⭐️ Integrate TypeScript](https://fireship.io/lessons/typescript-nodejs-setup/)
 * [⭐️ Nest.js](https://docs.nestjs.com/first-steps)
