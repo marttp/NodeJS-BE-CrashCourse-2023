@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  task-mgmt-express:
+    image: marttp/task-mgmt-express:latest
+    restart: always
+    env_file: .env
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./logs:/app/logs
+  mongo:
+    image: mongo:6.0.5-jammy
+    restart: always
+    env_file: .env
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    command: [ --auth ]
