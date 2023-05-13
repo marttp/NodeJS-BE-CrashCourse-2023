@@ -1,4 +1,4 @@
-const ENV = process.env.NODE_ENV || 'dev';
+const ENV = process.env.NODE_ENV || 'development';
 
 const APPLICATION_NAME = 'task-management-service';
 
@@ -18,6 +18,7 @@ const LOG_SEV_LEVEL = process.env.LOG_SEV_LEVEL || 'debug';
 const BASE_PATH = process.cwd();
 
 export {
+  ENV,
   PORT,
   APPLICATION_NAME,
   MONGO_DB_URL,

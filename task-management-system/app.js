@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import compression from 'compression';
+import helmet from 'helmet';
 import taskRouter from './domain/task/task.controller.js';
 import { connectMongoDB } from './configs/db.config.js';
 import { FE_URL } from './configs/config.js';
@@ -19,6 +21,8 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+app.use(compression());
+app.use(helmet());
 
 app.use('/api/v1/tasks', taskRouter);
 
