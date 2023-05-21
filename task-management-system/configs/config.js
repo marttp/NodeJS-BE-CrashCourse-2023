@@ -20,6 +20,19 @@ const LOG_SEV_LEVEL = process.env.LOG_SEV_LEVEL || 'debug';
 
 const BASE_PATH = process.cwd();
 
+const SALT_ROUND = process.env.SALT_ROUND || 10;
+
+const JWT_OPTIONS = {
+  issuer: 'tpcoder.dev',
+  private: process.env.PRIVATE_BASE64 || 'private',
+  public: process.env.PUBLIC_BASE64 || 'public',
+  jwtCookieName: 'jwt',
+  algorithm: 'RS256'
+};
+
+JWT_OPTIONS.private = Buffer.from(JWT_OPTIONS.private, 'base64')
+JWT_OPTIONS.public = Buffer.from(JWT_OPTIONS.public, 'base64')
+
 export {
   ENV,
   PORT,
@@ -28,4 +41,6 @@ export {
   FE_URL,
   LOG_SEV_LEVEL,
   BASE_PATH,
+  SALT_ROUND,
+  JWT_OPTIONS,
 };
